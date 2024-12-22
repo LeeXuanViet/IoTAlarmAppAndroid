@@ -13,50 +13,93 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alarm Time" />
+            android:text="Alarm Time"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <!-- Hiển thị theo thang 24 giờ -->
+
+        <!-- Sound (loại nhạc) -->
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:timePickerMode="spinner" />
 
-        <!-- Sound (loại nhạc) -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sound" />
+            android:text="Sound"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
         <Spinner
             android:id="@+id/spinnerSound"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/sound_options"
+            android:background="?attr/selectableItemBackground" />
 
         <!-- Repeat (lặp lại) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repeat" />
-        <EditText
-            android:id="@+id/editTextRepeat"
+            android:text="Repeat"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:entries="@array/repeat_options"
+            android:paddingBottom="8dp" />
+        <Spinner
+            android:id="@+id/spinnerRepeat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter repeat (e.g., Daily, None)" />
+            android:layout_height="wrap_content" />
+
 
         <!-- Volume (âm lượng) -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volume" />
+            android:text="Volume"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
         <SeekBar
             android:id="@+id/seekBarVolume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="100" />
 
+        <!-- Light Blink -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Light Blink"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+        <Switch
+            android:id="@+id/switchLightBlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enable Light Blink" />
+
         <!-- Nút Lưu -->
         <Button
             android:id="@+id/btnSaveAlarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:text="Save"
+            android:textAllCaps="false"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp" />
+
     </LinearLayout>
 </ScrollView>
