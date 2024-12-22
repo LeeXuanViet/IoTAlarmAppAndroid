@@ -40,5 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         alarmViewModel.fetchAlarms()
     }
+    override fun onResume() {
+        super.onResume()
+        alarmViewModel.fetchAlarms() // Đảm bảo dữ liệu luôn được làm mới khi trở lại MainActivity
+    }
+
 
 }

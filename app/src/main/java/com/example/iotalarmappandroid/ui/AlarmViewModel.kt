@@ -13,6 +13,39 @@ class AlarmViewModel(private val alarmRepository: AlarmRepository) : ViewModel()
     private val _alarms = MutableLiveData<List<Alarm>>()
     val alarms: LiveData<List<Alarm>> get() = _alarms
 
+    fun addAlarm(alarm: Alarm) {
+        viewModelScope.launch {
+            try {
+                alarmRepository.createAlarm(alarm)
+                fetchAlarms() // Refresh danh sách báo thức
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun updateAlarm(id: Int, alarm: Alarm) {
+        viewModelScope.launch {
+            try {
+                alarmRepository.updateAlarm(id, alarm)
+                fetchAlarms() // Refresh danh sách báo thức
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun deleteAlarm(id: Int) {
+        viewModelScope.launch {
+            try {
+                alarmRepository.deleteAlarm(id)
+                fetchAlarms() // Refresh danh sách báo thức
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun fetchAlarms() {
         viewModelScope.launch {
             try {
