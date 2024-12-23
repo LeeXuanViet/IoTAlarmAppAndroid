@@ -1,6 +1,8 @@
 package com.example.iotalarmappandroid
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.iotalarmappandroid.data.AlarmRepository
 import com.example.iotalarmappandroid.databinding.ActivityMainBinding
 import com.example.iotalarmappandroid.network.ApiClient
+import com.example.iotalarmappandroid.ui.AddAlarmActivity
 import com.example.iotalarmappandroid.ui.AlarmAdapter
 import com.example.iotalarmappandroid.ui.AlarmViewModel
 import com.example.iotalarmappandroid.ui.AlarmViewModelFactory
@@ -39,6 +42,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         alarmViewModel.fetchAlarms()
+
+        // Khởi tạo nút Add Alarm
+        val btnAddAlarm = findViewById<Button>(R.id.btnAddAlarm)
+
+        // Thiết lập sự kiện click cho nút
+        btnAddAlarm.setOnClickListener {
+            // Mở AddAlarmActivity khi nút được nhấn
+            val intent = Intent(this, AddAlarmActivity::class.java)
+            startActivity(intent)
+        }
     }
     override fun onResume() {
         super.onResume()

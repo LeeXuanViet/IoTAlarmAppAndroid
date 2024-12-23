@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://192.168.1.79:8080/" // Địa chỉ IPv4 của máy bạn
+    private const val BASE_URL = "http://10.13.32.135:8080/" // Địa chỉ IPv4 của máy bạn
 
     val apiService: ApiService by lazy {
         Retrofit.Builder()
