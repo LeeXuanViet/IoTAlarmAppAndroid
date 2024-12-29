@@ -3,6 +3,7 @@ package com.example.iotalarmappandroid
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -31,13 +32,14 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         alarmViewModel.alarms.observe(this, Observer { alarms ->
-            println("Dữ liệu nhận được từ ViewModel: $alarms") // Debug log
             if (alarms.isNullOrEmpty()) {
                 binding.emptyStateText.text = "Không có báo thức nào."
                 binding.recyclerView.adapter = null
             } else {
-                binding.emptyStateText.text = "" // Xóa trạng thái rỗng
-                binding.recyclerView.adapter = AlarmAdapter(alarms)
+                binding.emptyStateText.text = ""
+                binding.recyclerView.adapter = AlarmAdapter(alarms) { updatedAlarm ->
+                    alarmViewModel.updateAlarm(updatedAlarm.id, updatedAlarm)
+                }
             }
         })
 
@@ -53,6 +55,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    fun deleteAlarm(alarmId: Int) {
+        alarmViewModel.deleteAlarm(alarmId) // Gọi ViewModel để xóa báo thức
+        Toast.makeText(this, "Đã xóa báo thức!", Toast.LENGTH_SHORT).show()
+    }
+
     override fun onResume() {
         super.onResume()
         alarmViewModel.fetchAlarms() // Đảm bảo dữ liệu luôn được làm mới khi trở lại MainActivity

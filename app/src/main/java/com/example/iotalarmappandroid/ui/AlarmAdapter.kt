@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.iotalarmappandroid.MainActivity
 import com.example.iotalarmappandroid.data.Alarm
 import com.example.iotalarmappandroid.databinding.ItemAlarmBinding // Import View Binding từ item_alarm.xml
 import java.text.SimpleDateFormat
@@ -12,7 +13,8 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
-class AlarmAdapter(private val alarms: List<Alarm>) : RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder>() {
+class AlarmAdapter(private val alarms: List<Alarm>,
+                   private val updateAlarmCallback: (Alarm) -> Unit) : RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmViewHolder {
         // Sử dụng View Binding để inflate layout
@@ -54,9 +56,26 @@ class AlarmAdapter(private val alarms: List<Alarm>) : RecyclerView.Adapter<Alarm
             val parsedTime = parseIsoTimeToLocalTime(alarm.alarmTime) // Chuyển đổi thời gian
             val formattedTime = String.format("%02d:%02d", parsedTime.first, parsedTime.second)
             binding.tvAlarmTime.text = formattedTime // Hiển thị giờ-phút
-            binding.tvAlarmSound.text = "Sound: ${alarm.sound}"
-            binding.tvAlarmVolume.text = "Volume: ${alarm.volume}"
+
             binding.tvAlarmRepeat.text = "Repeat: ${alarm.repeat}"
+
+
+            // Xử lý sự kiện click vào nút "Xóa"
+            binding.btnDeleteAlarm.setOnClickListener {
+                val context = binding.root.context
+                if (context is MainActivity) {
+                    context.deleteAlarm(alarm.id)
+                }
+            }
+
+            // Thiết lập trạng thái của Switch
+            binding.switchIsUsed.isChecked = alarm.isUsed
+
+            // Xử lý sự kiện thay đổi trạng thái của Switch
+            binding.switchIsUsed.setOnCheckedChangeListener { _, isChecked ->
+                val updatedAlarm = alarm.copy(isUsed = isChecked)
+                updateAlarmCallback(updatedAlarm) // Gọi callback để cập nhật dữ liệu
+            }
 
             // Xử lý sự kiện click vào item để mở EditAlarmActivity
             binding.root.setOnClickListener {

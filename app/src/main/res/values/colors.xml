@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="custom_red">#FF0000</color> <!-- Màu đỏ tùy chỉnh -->
+    <color name="custom_light_gray">#989696</color> <!-- Màu xám nhạt tùy chỉnh -->
+    <color name="colorAccent">#FF4081</color> <!-- Màu hồng nhẹ hiện đại -->
+
 </resources>
